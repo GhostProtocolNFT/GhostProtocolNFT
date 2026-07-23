@@ -118,7 +118,13 @@
       word-break: break-all;
       display: inline-block;
       margin: 4px 0;
+      padding: 6px 12px;
+      background: #0a0a0a;
+      border-radius: 8px;
+      border: 1px solid #00ccff33;
+      text-decoration: none;
     }
+    .mobile-warning a:hover { background: #1a1a1a; }
     .security-notice {
       background: #1a1a1a;
       padding: 12px;
@@ -130,6 +136,17 @@
       text-align: left;
     }
     .security-notice strong { color: #ff8844; }
+    .copy-link {
+      background: #0a0a0a;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #00ccff;
+      word-break: break-all;
+      border: 1px solid #00ccff22;
+      margin-top: 6px;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -162,15 +179,16 @@
     <span style="color:#888; font-size:11px;">This site is safe and does not request any permissions.</span>
   </div>
 
-  <!-- MOBİL UYARI (Trust Wallet düzeltildi) -->
+  <!-- MOBİL UYARI (Trust Wallet FIX) -->
   <div id="mobileWarning" class="mobile-warning hidden">
     <strong>📱 Mobile wallet connection:</strong><br>
     Please open this site in the <strong>MetaMask</strong> or <strong>Trust Wallet</strong> in-app browser.<br>
     <br>
     <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 Open with MetaMask</a><br>
-    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet (fix)</a><br>
-    <span style="color:#888; font-size:11px;">If Trust Wallet shows an error, copy this link and paste it into Trust Wallet's browser:</span><br>
-    <span style="color:#00ccff; font-size:11px; word-break:break-all;">https://ghostprotocolnft.onrender.com</span>
+    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet</a><br>
+    <br>
+    <span style="color:#888; font-size:11px;">If the button above doesn't work, copy this link and paste it into Trust Wallet's browser:</span><br>
+    <span class="copy-link">https://ghostprotocolnft.onrender.com</span>
   </div>
 
   <div class="footer">© 2026 Ghost Protocol – Whitelist</div>
@@ -187,6 +205,18 @@
   }, 2000);
 
   async function connectWallet(type) {
+    // TRUST WALLET ÖZEL KONTROL
+    if (type === 'Trust Wallet' && isMobile) {
+      // Trust Wallet deep link'i dene
+      const trustUrl = 'https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com';
+      window.location.href = trustUrl;
+      // Eğer deep link çalışmazsa, 2 saniye sonra uyarıyı göster
+      setTimeout(() => {
+        document.getElementById('mobileWarning').classList.remove('hidden');
+      }, 2000);
+      return;
+    }
+
     if (isMobile && typeof window.ethereum === 'undefined') {
       document.getElementById('mobileWarning').classList.remove('hidden');
       return;
