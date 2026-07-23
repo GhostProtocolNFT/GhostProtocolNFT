@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Ghost Protocol NFT</title>
 
   <!-- Ghost Favicon -->
   <link
     rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>"
-  />
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>"
+  >
 
   <style>
     :root {
       --bg: #08090d;
       --card: #11131a;
-      --card-border: rgba(255, 255, 255, 0.08);
+      --border: rgba(255,255,255,0.08);
       --text: #f5f7fb;
       --muted: #9da4b2;
-      --accent: #7c5cff;
-      --accent-hover: #6947f0;
+      --accent: #7657ff;
+      --accent-hover: #6345ed;
       --success: #37d67a;
       --danger: #ff5f6d;
     }
@@ -37,10 +37,17 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+
       background:
-        radial-gradient(circle at top, rgba(124, 92, 255, 0.18), transparent 40%),
+        radial-gradient(
+          circle at top,
+          rgba(118, 87, 255, 0.2),
+          transparent 45%
+        ),
         var(--bg);
+
       color: var(--text);
+
       font-family:
         Inter,
         -apple-system,
@@ -57,13 +64,15 @@
     }
 
     .card {
-      background: rgba(17, 19, 26, 0.94);
-      border: 1px solid var(--card-border);
+      background: rgba(17, 19, 26, 0.95);
+      border: 1px solid var(--border);
       border-radius: 24px;
       padding: 28px;
+
       box-shadow:
-        0 24px 80px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        0 25px 80px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+
       backdrop-filter: blur(20px);
     }
 
@@ -73,7 +82,7 @@
     }
 
     .ghost {
-      font-size: 58px;
+      font-size: 60px;
       line-height: 1;
       margin-bottom: 12px;
     }
@@ -87,7 +96,6 @@
     .subtitle {
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.5;
     }
 
     .wallet-buttons {
@@ -96,56 +104,63 @@
       margin-top: 24px;
     }
 
-    button {
+    .wallet-button {
       width: 100%;
-      min-height: 54px;
+      min-height: 56px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+
       border: 0;
       border-radius: 14px;
-      padding: 14px 18px;
+
+      background: #242833;
+      color: white;
+
       font-size: 15px;
       font-weight: 700;
+
       cursor: pointer;
-      color: white;
+
       transition:
         transform 0.2s ease,
-        background 0.2s ease,
-        opacity 0.2s ease;
+        background 0.2s ease;
     }
 
-    button:hover {
+    .wallet-button:hover {
+      background: #303642;
       transform: translateY(-1px);
     }
 
-    button:active {
+    .wallet-button:active {
       transform: translateY(0);
     }
 
-    .wallet-btn {
-      background: var(--accent);
-    }
-
-    .wallet-btn:hover {
-      background: var(--accent-hover);
-    }
-
-    .wallet-btn.secondary {
-      background: #242833;
-    }
-
-    .wallet-btn.secondary:hover {
-      background: #303642;
+    .wallet-logo {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
 
     .status {
       display: none;
+
       margin-top: 20px;
-      padding: 14px;
-      border-radius: 12px;
-      background: rgba(55, 214, 122, 0.1);
-      border: 1px solid rgba(55, 214, 122, 0.25);
+      padding: 15px;
+
+      border-radius: 13px;
+
+      background: rgba(55,214,122,0.1);
+      border: 1px solid rgba(55,214,122,0.25);
+
       color: var(--success);
+
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.6;
+
       word-break: break-word;
     }
 
@@ -155,11 +170,14 @@
 
     .fallback {
       display: none;
+
       margin-top: 18px;
       padding: 16px;
+
       border-radius: 14px;
-      background: rgba(255, 95, 109, 0.08);
-      border: 1px solid rgba(255, 95, 109, 0.25);
+
+      background: rgba(255,95,109,0.08);
+      border: 1px solid rgba(255,95,109,0.25);
     }
 
     .fallback.visible {
@@ -173,28 +191,43 @@
       margin-bottom: 12px;
     }
 
-    .copy-btn {
+    .copy-button {
+      width: 100%;
+      min-height: 48px;
+
+      border: 0;
+      border-radius: 12px;
+
       background: #2a2f3a;
+      color: white;
+
       font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
     }
 
-    .copy-btn:hover {
-      background: #353c49;
+    .copy-button:hover {
+      background: #363d49;
     }
 
-    .copy-btn.copied {
+    .copy-button.copied {
       background: var(--success);
       color: #07150d;
     }
 
     .address {
-      margin-top: 20px;
+      margin-top: 22px;
       padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-top: 1px solid rgba(255,255,255,0.08);
+
+      text-align: center;
+
       color: var(--muted);
       font-size: 12px;
       line-height: 1.5;
-      text-align: center;
+
       word-break: break-all;
     }
 
@@ -204,12 +237,8 @@
       margin-bottom: 5px;
     }
 
-    .loading {
-      opacity: 0.65;
-      pointer-events: none;
-    }
-
     @media (max-width: 480px) {
+
       .card {
         padding: 22px;
         border-radius: 20px;
@@ -222,6 +251,7 @@
       .ghost {
         font-size: 52px;
       }
+
     }
   </style>
 </head>
@@ -229,70 +259,122 @@
 <body>
 
   <main class="container">
+
     <section class="card">
 
       <div class="brand">
+
         <div class="ghost">👻</div>
+
         <h1>Ghost Protocol NFT</h1>
+
         <p class="subtitle">
           Connect your wallet to continue
         </p>
+
       </div>
+
 
       <div class="wallet-buttons">
 
-        <!-- MetaMask: kept separate -->
+        <!-- METAMASK -->
         <button
           id="metamaskBtn"
-          class="wallet-btn"
+          class="wallet-button"
           type="button"
         >
-          🦊 Connect MetaMask
+
+          <img
+            class="wallet-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"
+            alt="MetaMask"
+          >
+
+          <span>MetaMask</span>
+
         </button>
 
-        <!-- Coinbase: kept separate -->
+
+        <!-- COINBASE WALLET -->
         <button
           id="coinbaseBtn"
-          class="wallet-btn secondary"
+          class="wallet-button"
           type="button"
         >
-          🔵 Connect Coinbase Wallet
+
+          <img
+            class="wallet-logo"
+            src="https://avatars.githubusercontent.com/u/18060234?s=200&v=4"
+            alt="Coinbase Wallet"
+          >
+
+          <span>Coinbase Wallet</span>
+
         </button>
 
-        <!-- Trust Wallet -->
+
+        <!-- TRUST WALLET -->
         <button
           id="trustBtn"
-          class="wallet-btn secondary"
+          class="wallet-button"
           type="button"
         >
-          👛 Connect Trust Wallet
+
+          <img
+            class="wallet-logo"
+            src="https://trustwallet.com/assets/images/media/assets/TWT.png"
+            alt="Trust Wallet"
+          >
+
+          <span>Trust Wallet</span>
+
         </button>
 
-        <!-- Bitget Wallet -->
+
+        <!-- BITGET WALLET -->
         <button
           id="bitgetBtn"
-          class="wallet-btn secondary"
+          class="wallet-button"
           type="button"
         >
-          💼 Connect Bitget Wallet
+
+          <img
+            class="wallet-logo"
+            src="https://web3.bitget.com/favicon.ico"
+            alt="Bitget Wallet"
+          >
+
+          <span>Bitget Wallet</span>
+
         </button>
 
       </div>
 
-      <!-- Only visible after successful connection -->
-      <div id="status" class="status"></div>
 
-      <!-- Mobile fallback -->
-      <div id="fallbackBox" class="fallback">
+      <!-- ONLY VISIBLE AFTER SUCCESSFUL CONNECTION -->
+      <div
+        id="status"
+        class="status"
+      ></div>
 
-        <div id="fallbackMessage" class="fallback-message">
+
+      <!-- FALLBACK -->
+      <div
+        id="fallbackBox"
+        class="fallback"
+      >
+
+        <div
+          id="fallbackMessage"
+          class="fallback-message"
+        >
           Wallet did not open.
-          Please copy the link and paste it into the browser inside your wallet app.
         </div>
+
 
         <button
           id="copyLinkBtn"
-          class="copy-btn"
+          class="copy-button"
           type="button"
         >
           📋 Copy Link
@@ -300,246 +382,303 @@
 
       </div>
 
+
       <div class="address">
+
         <strong>Recipient Address</strong>
+
         0x7099b123d679097A7CDf9f475496A3A093811f74
+
       </div>
 
     </section>
+
   </main>
+
 
   <script>
 
-    /************************************************************
-     * CONFIGURATION
-     ************************************************************/
+    /*
+    ============================================================
+    CONFIGURATION
+    ============================================================
+    */
 
-    const DAPP_URL = "https://ghostprotocolnft.onrender.com";
+    const DAPP_URL =
+      "https://ghostprotocolnft.onrender.com";
+
 
     const RECIPIENT_ADDRESS =
       "0x7099b123d679097A7CDf9f475496A3A093811f74";
 
 
-    /************************************************************
-     * ELEMENTS
-     ************************************************************/
+    /*
+    ============================================================
+    ELEMENTS
+    ============================================================
+    */
 
-    const statusBox = document.getElementById("status");
-    const fallbackBox = document.getElementById("fallbackBox");
-    const fallbackMessage = document.getElementById("fallbackMessage");
-    const copyLinkBtn = document.getElementById("copyLinkBtn");
+    const statusBox =
+      document.getElementById("status");
+
+    const fallbackBox =
+      document.getElementById("fallbackBox");
+
+    const fallbackMessage =
+      document.getElementById("fallbackMessage");
+
+    const copyLinkBtn =
+      document.getElementById("copyLinkBtn");
+
 
     let currentFallbackLink = "";
 
 
-    /************************************************************
-     * UI HELPERS
-     ************************************************************/
+    /*
+    ============================================================
+    SHOW CONNECTED
+    ============================================================
+    */
 
-    function showConnected(address, walletName) {
+    function showConnected(
+      address,
+      walletName
+    ) {
 
-      // "Connected" only appears after successful connection
       statusBox.innerHTML = `
+
         <strong>Connected</strong><br>
+
         ${walletName}<br>
+
         <small>${address}</small>
+
       `;
 
-      statusBox.classList.add("visible");
+      statusBox.classList.add(
+        "visible"
+      );
 
-      fallbackBox.classList.remove("visible");
+      fallbackBox.classList.remove(
+        "visible"
+      );
+
     }
 
 
-    function showFallback(walletName, link) {
+    /*
+    ============================================================
+    SHOW FALLBACK
+    ============================================================
+    */
 
-      currentFallbackLink = link;
+    function showFallback(
+      walletName,
+      link
+    ) {
+
+      currentFallbackLink =
+        link;
 
       fallbackMessage.textContent =
         `${walletName} did not open. Please copy the link and paste it into the browser inside the wallet app.`;
 
-      fallbackBox.classList.add("visible");
+      fallbackBox.classList.add(
+        "visible"
+      );
+
     }
 
+
+    /*
+    ============================================================
+    COPY LINK
+    ============================================================
+    */
 
     async function copyFallbackLink() {
 
-      if (!currentFallbackLink) return;
+      if (
+        !currentFallbackLink
+      ) {
+
+        return;
+
+      }
+
 
       try {
 
-        await navigator.clipboard.writeText(currentFallbackLink);
+        await navigator.clipboard.writeText(
+          currentFallbackLink
+        );
 
-        copyLinkBtn.textContent = "✓ Link Copied";
-        copyLinkBtn.classList.add("copied");
+        copyLinkBtn.textContent =
+          "✓ Link Copied";
+
+        copyLinkBtn.classList.add(
+          "copied"
+        );
+
 
         setTimeout(() => {
 
-          copyLinkBtn.textContent = "📋 Copy Link";
-          copyLinkBtn.classList.remove("copied");
+          copyLinkBtn.textContent =
+            "📋 Copy Link";
+
+          copyLinkBtn.classList.remove(
+            "copied"
+          );
 
         }, 2500);
+
 
       } catch (error) {
 
-        // Fallback for older mobile browsers
-        const textarea = document.createElement("textarea");
+        const textarea =
+          document.createElement(
+            "textarea"
+          );
 
-        textarea.value = currentFallbackLink;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
 
-        document.body.appendChild(textarea);
+        textarea.value =
+          currentFallbackLink;
+
+        textarea.style.position =
+          "fixed";
+
+        textarea.style.opacity =
+          "0";
+
+
+        document.body.appendChild(
+          textarea
+        );
 
         textarea.focus();
+
         textarea.select();
 
-        document.execCommand("copy");
+        document.execCommand(
+          "copy"
+        );
 
         textarea.remove();
 
-        copyLinkBtn.textContent = "✓ Link Copied";
+
+        copyLinkBtn.textContent =
+          "✓ Link Copied";
+
 
         setTimeout(() => {
-          copyLinkBtn.textContent = "📋 Copy Link";
+
+          copyLinkBtn.textContent =
+            "📋 Copy Link";
+
         }, 2500);
+
       }
-    }
-
-
-    /************************************************************
-     * MOBILE DETECTION
-     ************************************************************/
-
-    function isMobile() {
-
-      return /Android|iPhone|iPad|iPod/i.test(
-        navigator.userAgent
-      );
 
     }
 
 
-    /************************************************************
-     * TRUST WALLET
-     *
-     * 1. Try Trust Wallet deep link
-     * 2. Wait briefly
-     * 3. If page remains visible, show fallback
-     ************************************************************/
+    /*
+    ============================================================
+    TRUST WALLET
+    ============================================================
+    */
 
     function connectTrustWallet() {
 
-      const trustDeepLink =
-        "https://link.trustwallet.com/open?url=" +
-        encodeURIComponent(DAPP_URL);
+
+      /*
+      IMPORTANT:
+
+      Correct Trust Wallet DApp Browser deep link:
+
+      open_url
+
+      NOT:
+
+      open
+      */
+
+
+      const trustLink =
+
+        "https://link.trustwallet.com/open_url" +
+
+        "?coin_id=60" +
+
+        "&url=" +
+
+        encodeURIComponent(
+          DAPP_URL
+        );
+
 
       showFallback(
         "Trust Wallet",
-        trustDeepLink
+        trustLink
       );
 
-      if (!isMobile()) {
 
-        window.open(
-          trustDeepLink,
-          "_blank",
-          "noopener,noreferrer"
-        );
+      /*
+      TRY TO OPEN TRUST WALLET
+      */
 
-        return;
-      }
-
-      const startTime = Date.now();
-
-      // Important:
-      // The browser may pause when the wallet app opens.
-      // If the browser remains visible after the timeout,
-      // we show the copy-link fallback.
-
-      window.location.href = trustDeepLink;
-
-      setTimeout(() => {
-
-        const elapsed =
-          Date.now() - startTime;
-
-        if (elapsed < 2200) {
-
-          showFallback(
-            "Trust Wallet",
-            trustDeepLink
-          );
-
-        }
-
-      }, 1800);
+      window.location.href =
+        trustLink;
 
     }
 
 
-    /************************************************************
-     * BITGET WALLET
-     *
-     * Official Bitget H5 deeplink format:
-     * https://bkcode.vip?action=dapp&url=YOUR_DAPP_URL
-     ************************************************************/
+    /*
+    ============================================================
+    BITGET WALLET
+    ============================================================
+    */
 
     function connectBitgetWallet() {
 
-      const bitgetDeepLink =
-        "https://bkcode.vip?action=dapp&url=" +
-        encodeURIComponent(DAPP_URL);
+
+      const bitgetLink =
+
+        "https://bkcode.vip" +
+
+        "?action=dapp" +
+
+        "&url=" +
+
+        encodeURIComponent(
+          DAPP_URL
+        );
+
 
       showFallback(
         "Bitget Wallet",
-        bitgetDeepLink
+        bitgetLink
       );
 
-      if (!isMobile()) {
 
-        window.open(
-          bitgetDeepLink,
-          "_blank",
-          "noopener,noreferrer"
-        );
-
-        return;
-      }
-
-      const startTime = Date.now();
-
-      window.location.href = bitgetDeepLink;
-
-      setTimeout(() => {
-
-        const elapsed =
-          Date.now() - startTime;
-
-        if (elapsed < 2200) {
-
-          showFallback(
-            "Bitget Wallet",
-            bitgetDeepLink
-          );
-
-        }
-
-      }, 1800);
+      window.location.href =
+        bitgetLink;
 
     }
 
 
-    /************************************************************
-     * METAMASK
-     *
-     * Existing MetaMask behavior remains independent.
-     ************************************************************/
+    /*
+    ============================================================
+    METAMASK
+    ============================================================
+    */
 
     async function connectMetaMask() {
 
+
       if (
-        typeof window.ethereum === "undefined"
+        typeof window.ethereum ===
+        "undefined"
       ) {
 
         alert(
@@ -547,32 +686,52 @@
         );
 
         return;
+
       }
+
 
       try {
 
+
         const accounts =
+
           await window.ethereum.request({
-            method: "eth_requestAccounts"
+
+            method:
+              "eth_requestAccounts"
+
           });
 
+
         if (
+
           accounts &&
+
           accounts.length > 0
+
         ) {
 
+
           showConnected(
+
             accounts[0],
+
             "MetaMask"
+
           );
 
         }
 
+
       } catch (error) {
 
+
         console.error(
+
           "MetaMask connection error:",
+
           error
+
         );
 
       }
@@ -580,66 +739,102 @@
     }
 
 
-    /************************************************************
-     * COINBASE WALLET
-     *
-     * Uses the Coinbase provider if available.
-     ************************************************************/
+    /*
+    ============================================================
+    COINBASE WALLET
+    ============================================================
+    */
 
     async function connectCoinbase() {
 
-      let provider = null;
+
+      let provider =
+        null;
+
 
       if (
+
         window.coinbaseWalletExtension
+
       ) {
+
 
         provider =
           window.coinbaseWalletExtension;
 
+
       } else if (
+
         window.ethereum &&
+
         window.ethereum.isCoinbaseWallet
+
       ) {
+
 
         provider =
           window.ethereum;
 
       }
 
+
       if (!provider) {
 
+
         alert(
+
           "Coinbase Wallet is not installed or available in this browser."
+
         );
 
+
         return;
+
       }
+
 
       try {
 
+
         const accounts =
+
           await provider.request({
-            method: "eth_requestAccounts"
+
+            method:
+              "eth_requestAccounts"
+
           });
 
+
         if (
+
           accounts &&
+
           accounts.length > 0
+
         ) {
 
+
           showConnected(
+
             accounts[0],
+
             "Coinbase Wallet"
+
           );
 
         }
 
+
       } catch (error) {
 
+
         console.error(
+
           "Coinbase Wallet connection error:",
+
           error
+
         );
 
       }
@@ -647,48 +842,81 @@
     }
 
 
-    /************************************************************
-     * EVENT LISTENERS
-     ************************************************************/
+    /*
+    ============================================================
+    EVENT LISTENERS
+    ============================================================
+    */
 
     document
-      .getElementById("trustBtn")
+
+      .getElementById(
+        "trustBtn"
+      )
+
       .addEventListener(
+
         "click",
+
         connectTrustWallet
+
       );
 
 
     document
-      .getElementById("bitgetBtn")
+
+      .getElementById(
+        "bitgetBtn"
+      )
+
       .addEventListener(
+
         "click",
+
         connectBitgetWallet
+
       );
 
 
     document
-      .getElementById("metamaskBtn")
+
+      .getElementById(
+        "metamaskBtn"
+      )
+
       .addEventListener(
+
         "click",
+
         connectMetaMask
+
       );
 
 
     document
-      .getElementById("coinbaseBtn")
+
+      .getElementById(
+        "coinbaseBtn"
+      )
+
       .addEventListener(
+
         "click",
+
         connectCoinbase
+
       );
 
 
     copyLinkBtn
-      .addEventListener(
-        "click",
-        copyFallbackLink
-      );
 
+      .addEventListener(
+
+        "click",
+
+        copyFallbackLink
+
+      );
 
   </script>
 
