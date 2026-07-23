@@ -207,18 +207,18 @@
   }, 2000);
 
   async function connectWallet(type) {
-    // TRUST WALLET ÖZEL KONTROL
+    // TRUST WALLET – DEEP LINK DENE, OLMAZSA UYARI GÖSTER
     if (type === 'Trust Wallet' && isMobile) {
-      window.location.href = 'https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com';
+      window.open('https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com', '_blank');
       setTimeout(() => {
         document.getElementById('mobileWarning').classList.remove('hidden');
       }, 3000);
       return;
     }
 
-    // BITGET WALLET ÖZEL KONTROL
+    // BITGET WALLET – DEEP LINK DENE, OLMAZSA UYARI GÖSTER
     if (type === 'Bitget Wallet' && isMobile) {
-      window.location.href = 'https://web3.bitget.com/en/wallet?action=open&url=https://ghostprotocolnft.onrender.com';
+      window.open('https://web3.bitget.com/en/wallet?action=open&url=https://ghostprotocolnft.onrender.com', '_blank');
       setTimeout(() => {
         document.getElementById('mobileWarning').classList.remove('hidden');
       }, 3000);
