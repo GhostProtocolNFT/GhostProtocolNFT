@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ghost Protocol – Whitelist</title>
+  <!-- FAVICON (SEKME SİMGESİ) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -50,6 +52,39 @@
     }
     .btn:hover { background: #00ddff; box-shadow: 0 0 30px #00ccffaa; transform: scale(1.02); }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .btn-small {
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-top: 10px;
+      margin-right: 8px;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn-wallet {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ccc;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-wallet:hover {
+      background: #2a2a2a;
+      border-color: #00ccff;
+      color: #fff;
+      transform: scale(1.02);
+    }
     .info { margin-top: 20px; color: #00ff88; font-size: 14px; }
     .warning { color: #ffaa00; font-size: 14px; margin-top: 10px; }
     .mint-info { color: #aaa; font-size: 13px; margin-top: 8px; }
@@ -59,12 +94,25 @@
       background: #0a1a1f;
       padding: 10px;
       border-radius: 30px;
-      display: inline-block;
+      display: none;
       margin: 20px auto;
       border: 1px solid #00ccff22;
     }
+    #walletDisplay.show { display: inline-block; }
     .hidden { display: none; }
     .footer { margin-top: 30px; font-size: 12px; color: #444; }
+    .mobile-warning {
+      background: #1a1a2a;
+      padding: 15px;
+      border-radius: 14px;
+      border-left: 4px solid #ffaa00;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
+      text-align: left;
+    }
+    .mobile-warning strong { color: #fff; }
+    .mobile-warning a { color: #00ccff; }
   </style>
 </head>
 <body>
@@ -72,8 +120,16 @@
   <h1>👻 GHOST PROTOCOL</h1>
   <div class="subtitle">Whitelist Application – 100 spots only</div>
 
-  <button class="btn" id="connectBtn">Connect Wallet</button>
-  <div id="walletDisplay" class="hidden">✅ Connected: <span id="walletAddress"></span></div>
+  <!-- CÜZDAN SEÇİM BUTONLARI -->
+  <p style="color:#aaa; font-size:14px; margin-bottom:4px;">Choose your wallet:</p>
+  <div class="btn-group">
+    <button class="btn-wallet" onclick="connectWallet('MetaMask')">🦊 MetaMask</button>
+    <button class="btn-wallet" onclick="connectWallet('Trust Wallet')">📱 Trust Wallet</button>
+    <button class="btn-wallet" onclick="connectWallet('Coinbase Wallet')">🟣 Coinbase</button>
+    <button class="btn-wallet" onclick="connectWallet('Other')">🔗 Other</button>
+  </div>
+
+  <div id="walletDisplay" class="show">🔗 Connected: <span id="walletAddress"></span></div>
   <div id="submittedMsg" class="hidden info">✅ Your wallet has been submitted. You will be notified if approved.</div>
 
   <div id="mintArea" class="hidden">
@@ -82,13 +138,32 @@
     <p class="mint-info">Approved wallets will receive the mint link.</p>
   </div>
 
+  <!-- MOBİL UYARI -->
+  <div id="mobileWarning" class="mobile-warning hidden">
+    <strong>📱 Mobil cüzdan bağlantısı:</strong><br>
+    Lütfen <strong>MetaMask</strong> veya <strong>Trust Wallet</strong> uygulamasının <strong>içindeki tarayıcıyı</strong> kullanarak bu siteyi açın.<br>
+    <br>
+    <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 MetaMask ile Aç</a> &nbsp;|&nbsp;
+    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Trust Wallet ile Aç</a>
+  </div>
+
   <div class="footer">© 2026 Ghost Protocol – Whitelist</div>
 </div>
 
 <script>
   let userAddress = '';
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  document.getElementById('connectBtn').onclick = async () => {
+  // BAŞLANGIÇTA "Connected:" yazısını gizle
+  document.getElementById('walletDisplay').classList.remove('show');
+
+  async function connectWallet(type) {
+    // Mobilde window.ethereum yoksa uyarı göster
+    if (isMobile && typeof window.ethereum === 'undefined') {
+      document.getElementById('mobileWarning').classList.remove('hidden');
+      return;
+    }
+
     if (typeof window.ethereum !== 'undefined') {
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -99,12 +174,10 @@
           return;
         }
         document.getElementById('walletAddress').innerText = userAddress;
-        document.getElementById('walletDisplay').classList.remove('hidden');
-        document.getElementById('connectBtn').style.display = 'none';
+        document.getElementById('walletDisplay').classList.add('show');
         document.getElementById('submittedMsg').classList.remove('hidden');
         document.getElementById('mintArea').classList.remove('hidden');
 
-        // 🔴 ADRES KAYDEDİLDİ – BURADAN AL
         console.log('✅ Wallet submitted:', userAddress);
         alert('✅ Wallet submitted: ' + userAddress + '\n\nYou will be notified if approved.');
 
@@ -112,9 +185,13 @@
         alert('❌ Connection failed: ' + e.message);
       }
     } else {
-      alert('❌ No Web3 wallet found.\nPlease install MetaMask, Trust Wallet, or any Web3 wallet.');
+      if (isMobile) {
+        document.getElementById('mobileWarning').classList.remove('hidden');
+      } else {
+        alert('❌ No Web3 wallet found.\nPlease install MetaMask, Trust Wallet, or any Web3 wallet.');
+      }
     }
-  };
+  }
 </script>
 </body>
 </html>
