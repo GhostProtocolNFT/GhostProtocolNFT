@@ -1,54 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Ghost Protocol NFT</title>
 
-  <!-- Ghost Favicon -->
+
+  <!-- GHOST FAVICON -->
+
   <link
     rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>"
   >
 
+
   <style>
+
     :root {
-      --bg: #08090d;
+
+      --background: #08090d;
       --card: #11131a;
       --border: rgba(255,255,255,0.08);
-      --text: #f5f7fb;
+      --text: #ffffff;
       --muted: #9da4b2;
-      --accent: #7657ff;
-      --accent-hover: #6345ed;
+      --button: #242833;
+      --button-hover: #323844;
       --success: #37d67a;
-      --danger: #ff5f6d;
+      --danger: #ff6673;
+
     }
 
+
     * {
+
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+
     }
 
+
     body {
+
       min-height: 100vh;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       padding: 20px;
 
       background:
+
         radial-gradient(
           circle at top,
-          rgba(118, 87, 255, 0.2),
+          rgba(118,87,255,0.2),
           transparent 45%
         ),
-        var(--bg);
+
+        var(--background);
 
       color: var(--text);
 
       font-family:
+
         Inter,
         -apple-system,
         BlinkMacSystemFont,
@@ -56,168 +80,255 @@
         Roboto,
         Arial,
         sans-serif;
+
     }
+
 
     .container {
+
       width: 100%;
       max-width: 440px;
+
     }
 
+
     .card {
-      background: rgba(17, 19, 26, 0.95);
+
+      background: rgba(17,19,26,0.96);
+
       border: 1px solid var(--border);
+
       border-radius: 24px;
+
       padding: 28px;
 
       box-shadow:
+
         0 25px 80px rgba(0,0,0,0.5),
+
         inset 0 1px 0 rgba(255,255,255,0.03);
 
       backdrop-filter: blur(20px);
+
     }
+
 
     .brand {
+
       text-align: center;
+
       margin-bottom: 28px;
+
     }
+
 
     .ghost {
+
       font-size: 60px;
+
       line-height: 1;
+
       margin-bottom: 12px;
+
     }
+
 
     h1 {
+
       font-size: 26px;
-      letter-spacing: -0.5px;
+
       margin-bottom: 8px;
+
     }
+
 
     .subtitle {
+
       color: var(--muted);
+
       font-size: 14px;
+
     }
 
-    .wallet-buttons {
+
+    .wallet-list {
+
       display: grid;
+
       gap: 12px;
+
       margin-top: 24px;
+
     }
+
 
     .wallet-button {
+
       width: 100%;
+
       min-height: 56px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 13px;
 
       border: 0;
+
       border-radius: 14px;
 
-      background: #242833;
+      background: var(--button);
+
       color: white;
 
       font-size: 15px;
+
       font-weight: 700;
 
       cursor: pointer;
 
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+      transition: 0.2s ease;
+
     }
+
 
     .wallet-button:hover {
-      background: #303642;
+
+      background: var(--button-hover);
+
       transform: translateY(-1px);
+
     }
+
 
     .wallet-button:active {
+
       transform: translateY(0);
+
     }
+
 
     .wallet-logo {
+
       width: 30px;
+
       height: 30px;
+
       object-fit: contain;
-      flex-shrink: 0;
+
+      border-radius: 7px;
+
     }
 
+
     .status {
+
       display: none;
 
       margin-top: 20px;
+
       padding: 15px;
 
       border-radius: 13px;
 
       background: rgba(55,214,122,0.1);
+
       border: 1px solid rgba(55,214,122,0.25);
 
       color: var(--success);
 
       font-size: 14px;
+
       line-height: 1.6;
 
       word-break: break-word;
+
     }
 
-    .status.visible {
+
+    .status.show {
+
       display: block;
+
     }
+
 
     .fallback {
+
       display: none;
 
       margin-top: 18px;
+
       padding: 16px;
 
       border-radius: 14px;
 
-      background: rgba(255,95,109,0.08);
-      border: 1px solid rgba(255,95,109,0.25);
+      background: rgba(255,102,115,0.08);
+
+      border: 1px solid rgba(255,102,115,0.25);
+
     }
 
-    .fallback.visible {
+
+    .fallback.show {
+
       display: block;
+
     }
 
-    .fallback-message {
+
+    .fallback-text {
+
       color: #ffd9dc;
+
       font-size: 14px;
+
       line-height: 1.55;
+
       margin-bottom: 12px;
+
     }
+
 
     .copy-button {
+
       width: 100%;
+
       min-height: 48px;
 
       border: 0;
+
       border-radius: 12px;
 
       background: #2a2f3a;
+
       color: white;
 
       font-size: 14px;
+
       font-weight: 700;
 
       cursor: pointer;
+
     }
 
-    .copy-button:hover {
-      background: #363d49;
-    }
 
     .copy-button.copied {
+
       background: var(--success);
+
       color: #07150d;
+
     }
 
+
     .address {
+
       margin-top: 22px;
+
       padding-top: 18px;
 
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -225,42 +336,56 @@
       text-align: center;
 
       color: var(--muted);
+
       font-size: 12px;
+
       line-height: 1.5;
 
       word-break: break-all;
+
     }
 
+
     .address strong {
+
       display: block;
+
       color: #d9dce4;
+
       margin-bottom: 5px;
+
     }
+
 
     @media (max-width: 480px) {
 
       .card {
+
         padding: 22px;
-        border-radius: 20px;
+
       }
 
       h1 {
-        font-size: 23px;
-      }
 
-      .ghost {
-        font-size: 52px;
+        font-size: 23px;
+
       }
 
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <main class="container">
 
+
     <section class="card">
+
 
       <div class="brand">
 
@@ -275,13 +400,14 @@
       </div>
 
 
-      <div class="wallet-buttons">
+      <div class="wallet-list">
+
 
         <!-- METAMASK -->
+
         <button
           id="metamaskBtn"
           class="wallet-button"
-          type="button"
         >
 
           <img
@@ -295,11 +421,11 @@
         </button>
 
 
-        <!-- COINBASE WALLET -->
+        <!-- COINBASE -->
+
         <button
           id="coinbaseBtn"
           class="wallet-button"
-          type="button"
         >
 
           <img
@@ -314,10 +440,10 @@
 
 
         <!-- TRUST WALLET -->
+
         <button
           id="trustBtn"
           class="wallet-button"
-          type="button"
         >
 
           <img
@@ -332,10 +458,10 @@
 
 
         <!-- BITGET WALLET -->
+
         <button
           id="bitgetBtn"
           class="wallet-button"
-          type="button"
         >
 
           <img
@@ -348,10 +474,12 @@
 
         </button>
 
+
       </div>
 
 
-      <!-- ONLY VISIBLE AFTER SUCCESSFUL CONNECTION -->
+      <!-- CONNECTED STATUS -->
+
       <div
         id="status"
         class="status"
@@ -359,25 +487,25 @@
 
 
       <!-- FALLBACK -->
+
       <div
-        id="fallbackBox"
+        id="fallback"
         class="fallback"
       >
 
         <div
-          id="fallbackMessage"
-          class="fallback-message"
-        >
-          Wallet did not open.
-        </div>
+          id="fallbackText"
+          class="fallback-text"
+        ></div>
 
 
         <button
-          id="copyLinkBtn"
+          id="copyButton"
           class="copy-button"
-          type="button"
         >
+
           📋 Copy Link
+
         </button>
 
       </div>
@@ -391,25 +519,37 @@
 
       </div>
 
+
     </section>
+
 
   </main>
 
 
   <script>
 
+
     /*
     ============================================================
-    CONFIGURATION
+    CONFIG
     ============================================================
     */
+
 
     const DAPP_URL =
       "https://ghostprotocolnft.onrender.com";
 
 
-    const RECIPIENT_ADDRESS =
-      "0x7099b123d679097A7CDf9f475496A3A093811f74";
+    const ETHEREUM_CHAIN_ID =
+      "0x1";
+
+
+    let fallbackLink =
+      "";
+
+
+    let fallbackTimer =
+      null;
 
 
     /*
@@ -418,49 +558,130 @@
     ============================================================
     */
 
-    const statusBox =
-      document.getElementById("status");
 
-    const fallbackBox =
-      document.getElementById("fallbackBox");
-
-    const fallbackMessage =
-      document.getElementById("fallbackMessage");
-
-    const copyLinkBtn =
-      document.getElementById("copyLinkBtn");
+    const status =
+      document.getElementById(
+        "status"
+      );
 
 
-    let currentFallbackLink = "";
+    const fallback =
+      document.getElementById(
+        "fallback"
+      );
+
+
+    const fallbackText =
+      document.getElementById(
+        "fallbackText"
+      );
+
+
+    const copyButton =
+      document.getElementById(
+        "copyButton"
+      );
 
 
     /*
     ============================================================
-    SHOW CONNECTED
+    DEVICE / WALLET DETECTION
     ============================================================
     */
+
+
+    function isAndroid() {
+
+      return /Android/i.test(
+        navigator.userAgent
+      );
+
+    }
+
+
+    function isIOS() {
+
+      return /iPhone|iPad|iPod/i.test(
+        navigator.userAgent
+      );
+
+    }
+
+
+    function isTrustWalletBrowser() {
+
+      return (
+
+        !!window.trustwallet ||
+
+        /TrustWallet/i.test(
+          navigator.userAgent
+        )
+
+      );
+
+    }
+
+
+    function isBitgetWalletBrowser() {
+
+      return (
+
+        /BitKeep|Bitget/i.test(
+          navigator.userAgent
+        )
+
+      );
+
+    }
+
+
+    function isMetaMaskBrowser() {
+
+      return (
+
+        /MetaMaskMobile/i.test(
+          navigator.userAgent
+        )
+
+      );
+
+    }
+
+
+    /*
+    ============================================================
+    STATUS
+    ============================================================
+    */
+
 
     function showConnected(
       address,
       walletName
     ) {
 
-      statusBox.innerHTML = `
 
-        <strong>Connected</strong><br>
+      status.innerHTML =
 
-        ${walletName}<br>
+        "<strong>Connected</strong><br>" +
 
-        <small>${address}</small>
+        walletName +
 
-      `;
+        "<br><small>" +
 
-      statusBox.classList.add(
-        "visible"
+        address +
+
+        "</small>";
+
+
+      status.classList.add(
+        "show"
       );
 
-      fallbackBox.classList.remove(
-        "visible"
+
+      fallback.classList.remove(
+        "show"
       );
 
     }
@@ -468,23 +689,30 @@
 
     /*
     ============================================================
-    SHOW FALLBACK
+    FALLBACK
     ============================================================
     */
+
 
     function showFallback(
       walletName,
       link
     ) {
 
-      currentFallbackLink =
+
+      fallbackLink =
         link;
 
-      fallbackMessage.textContent =
-        `${walletName} did not open. Please copy the link and paste it into the browser inside the wallet app.`;
 
-      fallbackBox.classList.add(
-        "visible"
+      fallbackText.textContent =
+
+        walletName +
+
+        " did not open. Please copy the link and paste it into the browser inside the wallet app.";
+
+
+      fallback.classList.add(
+        "show"
       );
 
     }
@@ -492,15 +720,15 @@
 
     /*
     ============================================================
-    COPY LINK
+    COPY
     ============================================================
     */
 
-    async function copyFallbackLink() {
 
-      if (
-        !currentFallbackLink
-      ) {
+    async function copyLink() {
+
+
+      if (!fallbackLink) {
 
         return;
 
@@ -509,31 +737,14 @@
 
       try {
 
+
         await navigator.clipboard.writeText(
-          currentFallbackLink
+          fallbackLink
         );
-
-        copyLinkBtn.textContent =
-          "✓ Link Copied";
-
-        copyLinkBtn.classList.add(
-          "copied"
-        );
-
-
-        setTimeout(() => {
-
-          copyLinkBtn.textContent =
-            "📋 Copy Link";
-
-          copyLinkBtn.classList.remove(
-            "copied"
-          );
-
-        }, 2500);
 
 
       } catch (error) {
+
 
         const textarea =
           document.createElement(
@@ -542,44 +753,57 @@
 
 
         textarea.value =
-          currentFallbackLink;
-
-        textarea.style.position =
-          "fixed";
-
-        textarea.style.opacity =
-          "0";
+          fallbackLink;
 
 
         document.body.appendChild(
           textarea
         );
 
-        textarea.focus();
 
         textarea.select();
+
 
         document.execCommand(
           "copy"
         );
 
+
         textarea.remove();
-
-
-        copyLinkBtn.textContent =
-          "✓ Link Copied";
-
-
-        setTimeout(() => {
-
-          copyLinkBtn.textContent =
-            "📋 Copy Link";
-
-        }, 2500);
 
       }
 
+
+      copyButton.textContent =
+        "✓ Link Copied";
+
+
+      copyButton.classList.add(
+        "copied"
+      );
+
+
+      setTimeout(() => {
+
+
+        copyButton.textContent =
+          "📋 Copy Link";
+
+
+        copyButton.classList.remove(
+          "copied"
+        );
+
+
+      }, 2500);
+
     }
+
+
+    copyButton.addEventListener(
+      "click",
+      copyLink
+    );
 
 
     /*
@@ -588,23 +812,38 @@
     ============================================================
     */
 
+
     function connectTrustWallet() {
 
 
       /*
-      IMPORTANT:
-
-      Correct Trust Wallet DApp Browser deep link:
-
-      open_url
-
-      NOT:
-
-      open
+      If already inside Trust Wallet,
+      DO NOT OPEN THE SAME SITE AGAIN.
+      Connect directly to its provider.
       */
 
 
-      const trustLink =
+      if (
+
+        isTrustWalletBrowser() &&
+
+        window.ethereum
+
+      ) {
+
+
+        connectProvider(
+          window.ethereum,
+          "Trust Wallet"
+        );
+
+
+        return;
+
+      }
+
+
+      const link =
 
         "https://link.trustwallet.com/open_url" +
 
@@ -617,18 +856,59 @@
         );
 
 
-      showFallback(
-        "Trust Wallet",
-        trustLink
-      );
+      fallbackLink =
+        link;
 
 
       /*
-      TRY TO OPEN TRUST WALLET
+      Try opening Trust Wallet.
       */
 
+
+      const startTime =
+        Date.now();
+
+
       window.location.href =
-        trustLink;
+        link;
+
+
+      /*
+      Only show fallback if
+      browser remains active.
+      */
+
+
+      clearTimeout(
+        fallbackTimer
+      );
+
+
+      fallbackTimer =
+
+        setTimeout(() => {
+
+
+          if (
+
+            Date.now() -
+
+            startTime <
+
+            2500
+
+          ) {
+
+
+            showFallback(
+              "Trust Wallet",
+              link
+            );
+
+          }
+
+
+        }, 1800);
 
     }
 
@@ -639,10 +919,43 @@
     ============================================================
     */
 
+
     function connectBitgetWallet() {
 
 
-      const bitgetLink =
+      /*
+      If already inside Bitget,
+      connect directly.
+      */
+
+
+      if (
+
+        isBitgetWalletBrowser() &&
+
+        window.ethereum
+
+      ) {
+
+
+        connectProvider(
+          window.ethereum,
+          "Bitget Wallet"
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+      Android officially supports
+      HTTPS BKConnect format.
+      */
+
+
+      const link =
 
         "https://bkcode.vip" +
 
@@ -655,137 +968,66 @@
         );
 
 
-      showFallback(
-        "Bitget Wallet",
-        bitgetLink
-      );
+      fallbackLink =
+        link;
+
+
+      const startTime =
+        Date.now();
 
 
       window.location.href =
-        bitgetLink;
+        link;
+
+
+      clearTimeout(
+        fallbackTimer
+      );
+
+
+      fallbackTimer =
+
+        setTimeout(() => {
+
+
+          if (
+
+            Date.now() -
+
+            startTime <
+
+            2500
+
+          ) {
+
+
+            showFallback(
+              "Bitget Wallet",
+              link
+            );
+
+          }
+
+
+        }, 1800);
 
     }
 
 
     /*
     ============================================================
-    METAMASK
+    PROVIDER CONNECTION
     ============================================================
     */
 
-    async function connectMetaMask() {
 
-
-      if (
-        typeof window.ethereum ===
-        "undefined"
-      ) {
-
-        alert(
-          "MetaMask is not installed or available in this browser."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-
-        const accounts =
-
-          await window.ethereum.request({
-
-            method:
-              "eth_requestAccounts"
-
-          });
-
-
-        if (
-
-          accounts &&
-
-          accounts.length > 0
-
-        ) {
-
-
-          showConnected(
-
-            accounts[0],
-
-            "MetaMask"
-
-          );
-
-        }
-
-
-      } catch (error) {
-
-
-        console.error(
-
-          "MetaMask connection error:",
-
-          error
-
-        );
-
-      }
-
-    }
-
-
-    /*
-    ============================================================
-    COINBASE WALLET
-    ============================================================
-    */
-
-    async function connectCoinbase() {
-
-
-      let provider =
-        null;
-
-
-      if (
-
-        window.coinbaseWalletExtension
-
-      ) {
-
-
-        provider =
-          window.coinbaseWalletExtension;
-
-
-      } else if (
-
-        window.ethereum &&
-
-        window.ethereum.isCoinbaseWallet
-
-      ) {
-
-
-        provider =
-          window.ethereum;
-
-      }
+    async function connectProvider(
+      provider,
+      walletName
+    ) {
 
 
       if (!provider) {
-
-
-        alert(
-
-          "Coinbase Wallet is not installed or available in this browser."
-
-        );
 
 
         return;
@@ -819,7 +1061,7 @@
 
             accounts[0],
 
-            "Coinbase Wallet"
+            walletName
 
           );
 
@@ -830,11 +1072,7 @@
 
 
         console.error(
-
-          "Coinbase Wallet connection error:",
-
           error
-
         );
 
       }
@@ -844,9 +1082,178 @@
 
     /*
     ============================================================
-    EVENT LISTENERS
+    METAMASK
     ============================================================
     */
+
+
+    async function connectMetaMask() {
+
+
+      /*
+      If already inside MetaMask,
+      use the injected provider.
+      */
+
+
+      if (
+
+        isMetaMaskBrowser() &&
+
+        window.ethereum
+
+      ) {
+
+
+        connectProvider(
+
+          window.ethereum,
+
+          "MetaMask"
+
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+      Desktop MetaMask extension.
+      */
+
+
+      if (
+
+        window.ethereum &&
+
+        window.ethereum.isMetaMask
+
+      ) {
+
+
+        connectProvider(
+
+          window.ethereum,
+
+          "MetaMask"
+
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+      Android / iOS:
+
+      Open the DApp in MetaMask mobile.
+      */
+
+
+      const metaMaskLink =
+
+        "https://metamask.app.link/dapp/" +
+
+        location.host +
+
+        location.pathname;
+
+
+      fallbackLink =
+        metaMaskLink;
+
+
+      showFallback(
+        "MetaMask",
+        metaMaskLink
+      );
+
+
+      window.location.href =
+        metaMaskLink;
+
+    }
+
+
+    /*
+    ============================================================
+    COINBASE WALLET
+    ============================================================
+    */
+
+
+    async function connectCoinbase() {
+
+
+      let provider =
+        null;
+
+
+      if (
+
+        window.coinbaseWalletExtension
+
+      ) {
+
+
+        provider =
+
+          window.coinbaseWalletExtension;
+
+      }
+
+
+      else if (
+
+        window.ethereum &&
+
+        window.ethereum.isCoinbaseWallet
+
+      ) {
+
+
+        provider =
+          window.ethereum;
+
+      }
+
+
+      if (!provider) {
+
+
+        alert(
+
+          "Coinbase Wallet is not installed or available in this browser."
+
+        );
+
+
+        return;
+
+      }
+
+
+      connectProvider(
+
+        provider,
+
+        "Coinbase Wallet"
+
+      );
+
+    }
+
+
+    /*
+    ============================================================
+    BUTTON EVENTS
+    ============================================================
+    */
+
 
     document
 
@@ -908,17 +1315,9 @@
       );
 
 
-    copyLinkBtn
-
-      .addEventListener(
-
-        "click",
-
-        copyFallbackLink
-
-      );
-
   </script>
 
+
 </body>
+
 </html>
