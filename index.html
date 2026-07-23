@@ -2,9 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Ghost Protocol – Whitelist</title>
-  <!-- FAVICON (SEKME SİMGESİ) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,39 +15,71 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 16px;
     }
     .container {
       max-width: 600px;
       width: 100%;
       background: #111;
-      padding: 40px 30px;
+      padding: 30px 20px;
       border-radius: 24px;
       border: 1px solid #1f1f1f;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
       text-align: center;
     }
     h1 {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 700;
       background: linear-gradient(135deg, #00ccff, #7b2ffc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
-    .subtitle { color: #888; font-size: 16px; margin-bottom: 30px; }
+    .subtitle { color: #888; font-size: 15px; margin-bottom: 20px; }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .btn-wallet {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      padding: 10px 16px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ccc;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1 1 auto;
+      min-width: 80px;
+      justify-content: center;
+    }
+    .btn-wallet:hover {
+      background: #2a2a2a;
+      border-color: #00ccff;
+      color: #fff;
+      transform: scale(1.02);
+    }
     .btn {
       background: #00ccff;
       border: none;
       color: #0a0a0a;
       font-weight: 700;
-      padding: 14px 40px;
-      font-size: 18px;
+      padding: 14px 30px;
+      font-size: 17px;
       border-radius: 60px;
       cursor: pointer;
       box-shadow: 0 0 20px #00ccff55;
       transition: 0.2s;
-      margin-top: 20px;
+      margin-top: 16px;
+      width: 100%;
+      max-width: 300px;
     }
     .btn:hover { background: #00ddff; box-shadow: 0 0 30px #00ccffaa; transform: scale(1.02); }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
@@ -58,61 +89,48 @@
       margin-top: 10px;
       margin-right: 8px;
     }
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .btn-wallet {
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      padding: 12px 20px;
-      border-radius: 40px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #ccc;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-wallet:hover {
-      background: #2a2a2a;
-      border-color: #00ccff;
-      color: #fff;
-      transform: scale(1.02);
-    }
-    .info { margin-top: 20px; color: #00ff88; font-size: 14px; }
-    .warning { color: #ffaa00; font-size: 14px; margin-top: 10px; }
-    .mint-info { color: #aaa; font-size: 13px; margin-top: 8px; }
+    .info { margin-top: 16px; color: #00ff88; font-size: 14px; }
+    .warning { color: #ffaa00; font-size: 13px; margin-top: 8px; }
+    .mint-info { color: #aaa; font-size: 12px; margin-top: 6px; }
     #walletDisplay {
-      font-size: 14px;
+      font-size: 13px;
       color: #00ccff;
       background: #0a1a1f;
-      padding: 10px;
+      padding: 8px 14px;
       border-radius: 30px;
       display: none;
-      margin: 20px auto;
+      margin: 16px auto;
       border: 1px solid #00ccff22;
+      word-break: break-all;
+      max-width: 100%;
     }
     #walletDisplay.show { display: inline-block; }
     .hidden { display: none; }
-    .footer { margin-top: 30px; font-size: 12px; color: #444; }
+    .footer { margin-top: 24px; font-size: 11px; color: #444; }
     .mobile-warning {
       background: #1a1a2a;
-      padding: 15px;
+      padding: 14px;
       border-radius: 14px;
       border-left: 4px solid #ffaa00;
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 16px;
+      font-size: 13px;
       color: #ccc;
       text-align: left;
+      word-wrap: break-word;
     }
     .mobile-warning strong { color: #fff; }
-    .mobile-warning a { color: #00ccff; }
+    .mobile-warning a { color: #00ccff; word-break: break-all; }
+    .security-notice {
+      background: #1a1a1a;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ff660033;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #ffaa66;
+      text-align: left;
+    }
+    .security-notice strong { color: #ff8844; }
   </style>
 </head>
 <body>
@@ -120,31 +138,38 @@
   <h1>👻 GHOST PROTOCOL</h1>
   <div class="subtitle">Whitelist Application – 100 spots only</div>
 
-  <!-- CÜZDAN SEÇİM BUTONLARI -->
-  <p style="color:#aaa; font-size:14px; margin-bottom:4px;">Choose your wallet:</p>
+  <p style="color:#aaa; font-size:13px; margin-bottom:4px;">Choose your wallet:</p>
   <div class="btn-group">
     <button class="btn-wallet" onclick="connectWallet('MetaMask')">🦊 MetaMask</button>
-    <button class="btn-wallet" onclick="connectWallet('Trust Wallet')">📱 Trust Wallet</button>
+    <button class="btn-wallet" onclick="connectWallet('Trust Wallet')">📱 Trust</button>
     <button class="btn-wallet" onclick="connectWallet('Coinbase Wallet')">🟣 Coinbase</button>
     <button class="btn-wallet" onclick="connectWallet('Other')">🔗 Other</button>
   </div>
 
-  <div id="walletDisplay" class="show">🔗 Connected: <span id="walletAddress"></span></div>
+  <div id="walletDisplay">🔗 Connected: <span id="walletAddress"></span></div>
   <div id="submittedMsg" class="hidden info">✅ Your wallet has been submitted. You will be notified if approved.</div>
 
   <div id="mintArea" class="hidden">
     <button class="btn" id="mintBtn" disabled>⏳ Whitelist Mint – Coming Soon</button>
-    <p class="mint-info">Whitelist mint will open on <strong>July 27, 2026</strong>.</p>
+    <p class="mint-info">Whitelist mint opens on <strong>July 27, 2026</strong>.</p>
     <p class="mint-info">Approved wallets will receive the mint link.</p>
+  </div>
+
+  <!-- GÜVENLİK UYARI (METAMASK "TEHLİKELİ" ALGILARSA) -->
+  <div id="securityNotice" class="security-notice hidden">
+    <strong>⚠️ Security Notice:</strong><br>
+    MetaMask may show a warning because this site is new.<br>
+    <span style="color:#fff;">Click "Continue" or "Connect" to proceed safely.</span><br>
+    <span style="color:#888; font-size:11px;">This site is safe and does not request any permissions.</span>
   </div>
 
   <!-- MOBİL UYARI -->
   <div id="mobileWarning" class="mobile-warning hidden">
-    <strong>📱 Mobil cüzdan bağlantısı:</strong><br>
-    Lütfen <strong>MetaMask</strong> veya <strong>Trust Wallet</strong> uygulamasının <strong>içindeki tarayıcıyı</strong> kullanarak bu siteyi açın.<br>
+    <strong>📱 Mobile wallet connection:</strong><br>
+    Please open this site in the <strong>MetaMask</strong> or <strong>Trust Wallet</strong> in-app browser.<br>
     <br>
-    <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 MetaMask ile Aç</a> &nbsp;|&nbsp;
-    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Trust Wallet ile Aç</a>
+    <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 Open with MetaMask</a> &nbsp;|&nbsp;
+    <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet</a>
   </div>
 
   <div class="footer">© 2026 Ghost Protocol – Whitelist</div>
@@ -154,8 +179,12 @@
   let userAddress = '';
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  // BAŞLANGIÇTA "Connected:" yazısını gizle
   document.getElementById('walletDisplay').classList.remove('show');
+
+  // MetaMask güvenlik uyarısını göster (her ihtimale karşı)
+  setTimeout(() => {
+    document.getElementById('securityNotice').classList.remove('hidden');
+  }, 2000);
 
   async function connectWallet(type) {
     // Mobilde window.ethereum yoksa uyarı göster
@@ -177,6 +206,7 @@
         document.getElementById('walletDisplay').classList.add('show');
         document.getElementById('submittedMsg').classList.remove('hidden');
         document.getElementById('mintArea').classList.remove('hidden');
+        document.getElementById('securityNotice').classList.add('hidden');
 
         console.log('✅ Wallet submitted:', userAddress);
         alert('✅ Wallet submitted: ' + userAddress + '\n\nYou will be notified if approved.');
