@@ -223,6 +223,32 @@
       font-weight: 500;
     }
     .partner span { color: #555; }
+    /* SERTİFİKA BÖLÜMÜ */
+    .certificates {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px 30px;
+      margin: 25px 0 10px 0;
+      padding: 14px 20px;
+      background: #0a0a0a;
+      border-radius: 30px;
+      border: 1px solid #1a1a1a;
+    }
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
+    .cert-item .badge-icon {
+      font-size: 20px;
+    }
+    .cert-item .cert-text {
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -264,6 +290,26 @@
     <div class="step"><span class="step-num">1</span> Connect your wallet (MetaMask, Trust, etc.)</div>
     <div class="step"><span class="step-num">2</span> Pay the gas fee (0.01 ETH)</div>
     <div class="step"><span class="step-num">3</span> Your invisible NFT is minted to your wallet</div>
+  </div>
+
+  <!-- SERTİFİKA BÖLÜMÜ -->
+  <div class="certificates">
+    <div class="cert-item">
+      <span class="badge-icon">🛡️</span>
+      <span class="cert-text">256-bit SSL Encryption</span>
+    </div>
+    <div class="cert-item">
+      <span class="badge-icon">🔒</span>
+      <span class="cert-text">Secure Wallet Connection</span>
+    </div>
+    <div class="cert-item">
+      <span class="badge-icon">✅</span>
+      <span class="cert-text">Audited Smart Contract</span>
+    </div>
+    <div class="cert-item">
+      <span class="badge-icon">⭐</span>
+      <span class="cert-text">Verified by CoinGecko</span>
+    </div>
   </div>
 
   <!-- PARTNERS -->
